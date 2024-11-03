@@ -3,7 +3,7 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active item-bg">
-                <img class="d-block w-100 h-100" src="{{$sliders[0]->photo}}" alt="banner">
+                {{-- <img class="d-block w-100 h-100" src="{{$sliders[0]->photo}}" alt="banner"> --}}
                 <div class="carousel-caption banner-slider-inner d-flex h-100 text-center">
                     <div class="carousel-content container b1-inner">
                         <div class="tab-search-section">

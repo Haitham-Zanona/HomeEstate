@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -85,6 +86,8 @@ Route::group(
 Route::group(['namespace' => 'Admin', 'middleware' => 'guest:admin','prefix'=>'admin'], function () {
     Route::get('login','LoginController@getLogin')-> name('get.admin.login');
     Route::post('login','LoginController@login')->name('admin.login');
+    Route::get('register','RegisterController@getRegister')-> name('get.admin.register');
+    Route::post('register',[RegisterController::class, 'register'])->name('admin.register');
 
 });
 

@@ -7,40 +7,42 @@ use App\Http\Requests\AdminLoginRequest;
 
 class LoginController extends Controller
 {
-    public function getLogin(){
+    public function getLogin()
+    {
         return view('dashboard.auth.login');
     }
 
     //     public function save(){
 
-        // $admin = new  App\Models\Admin();
-        // $admin -> name ="Yassir";
-        // $admin -> email ="Yassir@gmail.com";
-        // $admin -> password = bcrypt("yassir");
-        // $admin -> save();
+    // $admin = new  App\Models\Admin();
+    // $admin -> name ="Yassir";
+    // $admin -> email ="Yassir@gmail.com";
+    // $admin -> password = bcrypt("yassir");
+    // $admin -> save();
 
     // }
-    
-    public function login(AdminLoginRequest $request){
+
+
+
+    public function login(AdminLoginRequest $request)
+    {
 
         // return $request;
-        
- 
 
         if (auth()->guard('admin')->attempt(['email' => $request->input("email"), 'password' => $request->input("password")])) {
-           
-            return redirect()->route('admin.dashboard')->with(['success'=>'Login successfully']);
+
+            return redirect()->route('admin.dashboard')->with(['success' => 'Login successfully']);
         }
 
-       return Redirect()->route('get.admin.login')->with(['error'=>'Error In Data']); 
-       
+        return Redirect()->route('get.admin.login')->with(['error' => 'Error In Data']);
+
     }
 
 
-
-    public function logout(){
+    public function logout()
+    {
         $guard = $this->getGuard();
-        $guard ->logout();
+        $guard->logout();
         return redirect()->route('admin.login');
     }
 
@@ -49,5 +51,4 @@ class LoginController extends Controller
         return auth('admin');
     }
 
-    
 }
