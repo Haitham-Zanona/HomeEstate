@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\City;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Requests\CityRequest;
-use  DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CitiesController extends Controller
 {
     public function index(){
 
        $cities= City::orderBy('id','DESC')->paginate(PAGINATION_COUNT);
-       return view('dashboard.cities.index',compact('cities'));
+       $admin = Auth::user();
+       return view('dashboard.cities.index',compact('cities', 'admin'));
     }
 
 
     public function create(){
 
-        
-        return view('dashboard.cities.create');
+        $admin = Auth::user();
+
+        return view('dashboard.cities.create', compact('admin'));
      }
 
 
@@ -31,7 +35,7 @@ class CitiesController extends Controller
 
     DB::beginTransaction();
         //validation
-   
+
         if (!$request->has('is_active'))
         $request->request->add(['is_active' => 0]);
         else
@@ -41,9 +45,10 @@ class CitiesController extends Controller
         if($request->has('photo')){
         $fileName= uploadImage('cities',$request->photo);
         }
-
-       $city= City::create($request->except('_token','photo'));
-
+        // dd($fileName);
+        // dd($request);
+       $city= City::create($request->except('_token'));
+        // dd($city);
        //save translation
        $city->name=$request->name;
        $city->photo=$fileName;
@@ -55,7 +60,7 @@ class CitiesController extends Controller
        return redirect()->route('admin.cities')->with(['success' => 'The Session Successfully Created']);
     }catch(\Exception $ex){
 
-                DB::rollback(); 
+                DB::rollback();
                 return redirect()->route('admin.cities')->with(['error'=>'there is Something wrong in Session']);
         }
 
@@ -66,6 +71,8 @@ class CitiesController extends Controller
 
         public function edit($id){
 
+            $admin = Auth::user();
+
             //get specific categories and its translations
 
             $city=City::find($id);
@@ -73,7 +80,7 @@ class CitiesController extends Controller
                 return redirect()->route('admin.cities')->with(['error'=>'Not Exist']);
             }
 
-            return view('dashboard.cities.edit',compact('city'));
+            return view('dashboard.cities.edit',compact('city', 'admin'));
 
         }
 
@@ -96,7 +103,7 @@ class CitiesController extends Controller
                 City::where('id',$id)->update(['photo'=> $fileName]);
             }
 
-            
+
             if (!$request->has('is_active'))
             $request->request->add(['is_active' => 0]);
             else
@@ -110,14 +117,14 @@ class CitiesController extends Controller
          DB::commit();
          return redirect()->route('admin.cities')->with(['success' => 'The Session Successfully Updated']);
         }catch(\Exception $ex){
-            
-            DB::rollback(); 
+
+            DB::rollback();
             return redirect()->route('admin.cities')->with(['error'=>'there is Something wrong in Session']);
         }
 
         }
 
-        
+
    public function delete($id){
     try{
        $city =City::orderBy('id','DESC')->find($id);
@@ -126,7 +133,7 @@ class CitiesController extends Controller
           return redirect()->route('admin.cities')->with(['error'=>'This section does not exist']);
        }
 
-       //delet Image from folder
+       //delete Image from folder
 
        $photo=Str::after($city->photo,'assets/');
        $photo = base_path('public/assets/'.$photo);

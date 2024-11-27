@@ -1,4 +1,4 @@
-		
+
 @extends('layouts.dashboard.admin')
 @section('content')
 
@@ -10,7 +10,7 @@
 							<h3>Categories</h3>
 						</div>
 
-					
+
 					</div>
 					<div class="clearfix"></div>
 					<div class="row">
@@ -21,7 +21,7 @@
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
-							
+
 										<li><a class="close-link"><i class="fa fa-close"></i></a>
 										</li>
 									</ul>
@@ -62,7 +62,7 @@
                                               @enderror
 											</div>
 										</div>
-										
+
 
 
 
@@ -70,7 +70,7 @@
 
 										<div class="item form-group">
                                               <label for="eventInput1">Status </label>
-                                           
+
                                                 <input type="checkbox" value="1"
                                                 name="is_active"
                                                 id="switcheryColor4"
@@ -78,20 +78,20 @@
                                                 checked/>
 												<label for="switcheryColor4"
 												class="card-title ml-1">Active</label>
-                
+
 												@error("is_active")
 												<span class="text-danger">{{$message}}</span>
 												@enderror
                                         </div>
 
 
-											
-									
-								
+
+
+
 										<div class="ln_solid"></div>
 										<div class="item form-group">
 											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button class="btn btn-primary" type="button">Cancel</button>
+												<button class="btn btn-primary" type="button"><a href="{{ route('admin.categories') }}" class="text-white">Cancel</a></button>
 												<button type="submit" class="btn btn-success">Submit</button>
 											</div>
 										</div>
@@ -102,8 +102,8 @@
 						</div>
 					</div>
 
-				
-					
+
+
 				</div>
 			</div>
 			<!-- /page content -->
@@ -111,4 +111,3 @@
 @stop
 
 
-   

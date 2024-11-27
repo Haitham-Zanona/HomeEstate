@@ -2,7 +2,7 @@
 
 return [
 
-  
+
     'categories' => 'Categories',
     'all categories' => 'All Categories',
     'add new category' => 'Add New Category',
@@ -11,5 +11,10 @@ return [
     'cities' => 'Cities',
     'all cities' => 'All Cities',
     'add new cities' => 'Add New Cities',
+
+    'Name' => 'Name',
+    'Status' => 'Status',
+    'Photo' => 'Photo',
+    'Edit' => 'Edit',
 
 ];

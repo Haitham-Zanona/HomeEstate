@@ -7,14 +7,17 @@ use App\http\Enums\CategoryType;
 use App\Http\Requests\MainCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MainCategoriesController extends Controller
 {
     public function index()
     {
+        $admin = Auth::user();
+
         $categories = Category::with('_parent')->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
-        return view('dashboard.categories.index', compact('categories'));
+        return view('dashboard.categories.index', compact('categories', 'admin'));
     }
 
     public function create()

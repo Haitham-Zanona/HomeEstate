@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Gentelella Alela! | </title>
-   
+    <title>{{ config('app.name') }} | Admin Dashboard</title>
+
     <!-- Dropzone.js -->
     <link href="{{asset('assets/admin/vendors/dropzone/dist/min/dropzone.min.css')}}" rel="stylesheet">
     <!-- Bootstrap -->
@@ -20,7 +20,7 @@
     <link href="{{asset('assets/admin/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{asset('assets/admin/vendors/iCheck/skins/flat/green.css')}}" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{{asset('assets/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet">
     <!-- JQVMap -->
@@ -38,7 +38,7 @@
   </head>
 
   <body class="nav-md">
-  
+
 
 <div class="container body">
       <div class="main_container">
@@ -47,7 +47,7 @@
             <div class="navbar nav_title" style="border: 0;">
               <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
             </div>
-            @include('dashboard.includes.side-bar')
+            @include('dashboard.includes.side-bar', ['admin' => $admin])
           </div>
         </div>
 
@@ -150,6 +150,6 @@
 
 @yield('script')
 
- 
+
   </body>
 </html>

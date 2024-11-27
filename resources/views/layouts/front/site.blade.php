@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-    <title>XERO - Real Estate HTML Template</title>
+    <title>{{ config('app.name') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <!-- External CSS libraries -->
@@ -46,7 +46,7 @@
 <!-- banner end -->
 
 
-<!-- content start -->  
+<!-- content start -->
     @yield('content')
 <!-- content end -->
 
